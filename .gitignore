@@ -1,0 +1,16 @@
+# Ignora todos os node_modules de subprojetos
+**/node_modules/
+
+# Ignora arquivos de ambiente
+.env
+
+# Logs
+*.log
+
+# Pastas de build (se tiver)
+dist/
+build/
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
