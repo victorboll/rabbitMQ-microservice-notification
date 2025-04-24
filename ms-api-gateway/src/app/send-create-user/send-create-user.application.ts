@@ -1,8 +1,9 @@
-import { IMessagerBrokerAccess } from "../../providers/messager-broker-access/implementations/imessager-broker-access.interface";
+
+import { IMessageBrokerAccess } from "../../providers/messager-broker-access";
 import { ISendCreateUserDTO } from "./isend-create-user-dto.interface";
 
 export class SendCreateUserApplication {
-  constructor(private readonly messagerBroker: IMessagerBrokerAccess) {}
+  constructor(private readonly messagerBroker: IMessageBrokerAccess) {}
 
     /**
     * Handle
@@ -13,7 +14,6 @@ export class SendCreateUserApplication {
   ): Promise<{ code: number; response: any }> {
     return await this.messagerBroker.sendRPC({
       queue: "user-create",
-
       message: userSend,
     });
   }
