@@ -1,3 +1,4 @@
+//Documentacao
 import {Column,CreatedAt,DataType,Model,Sequelize,Table,UpdatedAt,} from "sequelize-typescript";
 import { IUser } from "./iuser.interface";
 

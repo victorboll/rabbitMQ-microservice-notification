@@ -1,3 +1,4 @@
+//Github
 import * as bcrypt from 'bcrypt';
 import { IEncrypt } from '../iencrypt.interface';
 

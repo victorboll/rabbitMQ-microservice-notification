@@ -1,3 +1,4 @@
+//Documentacao
 import { Sequelize } from "sequelize-typescript";
 import { UserEntity } from "../../../models/user/user.entity";
 

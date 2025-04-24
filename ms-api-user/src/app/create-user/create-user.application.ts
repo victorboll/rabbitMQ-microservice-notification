@@ -1,3 +1,4 @@
+//Documentacao
 import { ErroCustom } from "../../errors/error-custom";
 import { UserEntity } from "../../models/user/user.entity";
 import { IEncrypt } from "../../providers/encrypt/iencrypt.interface";
