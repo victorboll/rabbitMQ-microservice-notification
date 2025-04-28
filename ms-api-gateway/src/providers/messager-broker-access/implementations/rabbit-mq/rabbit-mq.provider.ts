@@ -23,15 +23,20 @@ export class RabbitMQ implements IMessageBrokerAccess {
     queue: string;
     message: any; // <- aceita qualquer tipo (não mudar na interface se não quiser)
   }): Promise<any> {
+    console.log('[PROVIDER] Iniciando envio RPC para fila:', queue);
+
     const correlationId = uuidv4();
     const replyQueue = await this.channel.assertQueue('', { exclusive: true });
   
     return new Promise((resolve) => {
+      console.log('[PROVIDER] Consumindo fila de resposta:', replyQueue.queue);
       this.channel.consume(
         replyQueue.queue,
         (msg) => {
           if (msg?.properties.correlationId === correlationId) {
             const content = msg.content.toString();
+            console.log('[PROVIDER] Resposta recebida na fila de resposta:', content);
+
             resolve(JSON.parse(content));
           }
         },
@@ -42,7 +47,9 @@ export class RabbitMQ implements IMessageBrokerAccess {
       const bufferMessage = Buffer.isBuffer(message)
         ? message
         : Buffer.from(JSON.stringify(message));
-  
+
+      console.log('[PROVIDER] Enviando mensagem para fila:', queue, 'com correlationId:', correlationId); // <-- Aqui!
+
       this.channel.sendToQueue(queue, bufferMessage, {
         replyTo: replyQueue.queue,
         correlationId,

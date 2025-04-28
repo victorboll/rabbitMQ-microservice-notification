@@ -45,19 +45,22 @@ export class UserEntity extends Model implements IUser {
   })
   cellPhone!: string;
 
-  @CreatedAt
+  /*@CreatedAt
   @Column({
     type: DataType.DATE,
-
-    defaultValue: Sequelize.literal("CURRENT_TIMESTAMP(3)"),
+    allowNull: false,
   })
   createdAt?: Date;
 
   @UpdatedAt
   @Column({
     type: DataType.DATE,
-
-    defaultValue: Sequelize.literal("CURRENT_TIMESTAMP(3)"),
+    allowNull: false,
   })
+  updatedAt?: Date;*/
+  @CreatedAt
+  createdAt?: Date;
+
+  @UpdatedAt
   updatedAt?: Date;
 }

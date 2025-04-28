@@ -26,11 +26,15 @@ export class RabbitMQ implements IMessagerBrokerAccess {
             .then(ch => {
                 ch.consume(queue, async (msg: any) => {
                     if (msg !== null) {
+                        console.log('[MICRO-USUARIO] Mensagem recebida na fila:', msg.content.toString());
                         let response = null;
                         const request = this.messageConvertRequest(msg);
                         try {
+                            console.log('[MICRO-USUARIO] Chamando o callback de criação de usuário com:', request);
                             response = await callback(request);
+                            console.log('[MICRO-USUARIO] Callback executado com sucesso. Resposta:', response);
                         } catch (err: any) {
+                            console.error('[MICRO-USUARIO] Erro ao executar callback:', err);
                             if (err instanceof ErroCustom) {
                                 const error = JSON.parse(err.message);
                                 response = {
@@ -53,7 +57,10 @@ export class RabbitMQ implements IMessagerBrokerAccess {
                             replyTo: msg.properties.replyTo,
                             correlationId: msg.properties.correlationId,
                             response: response
-                        })
+                        });
+
+                        console.log('[MICRO-USUARIO] Resposta enviada para a API Gateway:', response);
+
                         ch.ack(msg);
                     }
                 });

@@ -9,9 +9,9 @@ export class SendCreateUserApplication {
     * Handle
     * @param userSend
     */
-  async handle(
-    userSend: ISendCreateUserDTO
-  ): Promise<{ code: number; response: any }> {
+  async handle(userSend: ISendCreateUserDTO): Promise<{ code: number; response: any }> {
+    console.log('[APPLICATION] Preparando para enviar usuário para RabbitMQ:', userSend);
+
     return await this.messagerBroker.sendRPC({
       queue: "user-create",
       message: userSend,
