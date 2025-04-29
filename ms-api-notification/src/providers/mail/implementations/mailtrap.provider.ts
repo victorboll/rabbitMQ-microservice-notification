@@ -7,15 +7,12 @@ export class MailTrap implements IMailAccess {
 
   constructor() {
     this.transporter = nodemailer.createTransport({
-      host: "",
-
-      port: 0,
-
+      host: "sandbox.smtp.mailtrap.io",
+      port: 2525,
       auth: {
-        user: "",
-
-        pass: "",
-      },
+        user: "e1c1676d0f6bfe",
+        pass: "inserir senha aqui"
+      }
     });
   }
 
